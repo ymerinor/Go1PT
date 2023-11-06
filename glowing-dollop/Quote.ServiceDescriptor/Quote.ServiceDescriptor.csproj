@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard1.1</TargetFramework>
+		<PackageId>glowing-dollop.ServiceDescriptor</PackageId>
+		<Version>0.0.1</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="LightInject" Version="6.4.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Quote\Quote.csproj" />
+	</ItemGroup>
+
+</Project>
