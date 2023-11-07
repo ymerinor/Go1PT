@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quote", "Quote\Quote.csproj", "{928BB990-4C59-4B23-A3D1-B466791878C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest.Quote", "UnitTest.Quote\UnitTest.Quote.csproj", "{D6FEB390-3384-4CD0-94A1-FD416410A004}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest.Quote", "UnitTest.Quote\UnitTest.Quote.csproj", "{D6FEB390-3384-4CD0-94A1-FD416410A004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quote.ServiceDescriptor", "Quote.ServiceDescriptor\Quote.ServiceDescriptor.csproj", "{DD41BD51-5778-4418-8C9F-49F70D1A64C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quote.ServiceDescriptor", "Quote.ServiceDescriptor\Quote.ServiceDescriptor.csproj", "{DD41BD51-5778-4418-8C9F-49F70D1A64C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

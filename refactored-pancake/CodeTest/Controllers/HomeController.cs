@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using PruebaIngreso.ExternalServices;
+using PruebaIngreso.ExternalServices.Component;
+using PruebaIngreso.ExternalServices.ExternalServices.Client;
 using Quote.Contracts;
 using Quote.Models;
 
@@ -10,9 +14,14 @@ namespace PruebaIngreso.Controllers
     {
         private readonly IQuoteEngine quote;
 
+        /// <summary>
+        /// Dependica de cliente de consumo de api para obtener magernes
+        /// </summary>
+        private readonly MarginApiProvider _marginApiClient;
         public HomeController(IQuoteEngine quote)
         {
             this.quote = quote;
+            _marginApiClient = new MarginApiProvider();
         }
 
         public ActionResult Index()
@@ -50,12 +59,13 @@ namespace PruebaIngreso.Controllers
             return View();
         }
 
-        public ActionResult Test3()
+        public async Task<ActionResult> Test3()
         {
-            return View();
+            var marginResult = await _marginApiClient.GetMarginAsync("E-U10-PRVPARKTRF");
+            return View(marginResult);
         }
 
-        public ActionResult Test4()
+        public async Task<ActionResult> Test4()
         {
             var request = new TourQuoteRequest
             {
@@ -71,8 +81,12 @@ namespace PruebaIngreso.Controllers
                 },
                 Language = Language.Spanish
             };
+            var coponentBase = new MarginApiProvider();
+            var marginProviderDecaratorPlus = new MarginProviderDecaratorPlus(coponentBase);
+            await marginProviderDecaratorPlus.GetMarginAsync("E-U10-PRVPARKTRF");
 
             var result = this.quote.Quote(request);
+
             return View(result.TourQuotes);
         }
     }
