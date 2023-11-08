@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using PruebaIngreso.ExternalServices.Client.Model;
+using System.Threading.Tasks;
 namespace PruebaIngreso.ExternalServices.Component
 {
     /// <summary>
@@ -16,7 +17,7 @@ namespace PruebaIngreso.ExternalServices.Component
         /// Si la API responde con cualquier otro estado, se devuelve 0.0.
         /// En caso de errores de solicitud HTTP, se maneja y se devuelve 0.0.
         /// </remarks>
-         Task<decimal>  GetMarginAsync(string code);
+         Task<MarginResponse>  GetMarginAsync(string code);
     }
 
 }

@@ -21,13 +21,12 @@ namespace PruebaIngreso.ExternalServices
         /// </summary>
         /// <param name="code">codigo de consulta.</param>
         /// <returns></returns>
-        public new async Task<decimal> GetMarginAsync(string code)
+        public async Task<decimal> GetMarginAsync(string code, decimal defaultMargin)
         {
-            decimal defaultMargin = 0.0m; // Margen predeterminado
-            decimal marginFromApi = await marginProvider.GetMarginAsync(code);
-            if (marginFromApi != defaultMargin)
+            var marginFromApi = await marginProvider.GetMarginAsync(code);
+            if (marginFromApi.Status == System.Net.HttpStatusCode.OK)
             {
-                return marginFromApi;
+                return marginFromApi.Margin;
             }
 
             return defaultMargin;

@@ -1,4 +1,5 @@
-﻿using PruebaIngreso.ExternalServices.Component;
+﻿using PruebaIngreso.ExternalServices.Client.Model;
+using PruebaIngreso.ExternalServices.Component;
 using PruebaIngreso.ExternalServices.ExternalServices.Client;
 using System.Threading.Tasks;
 
@@ -24,9 +25,9 @@ namespace PruebaIngreso.ExternalServices
         }
 
         /// <inheritdoc/>
-        public async Task<decimal> GetMarginAsync(string code)
+        public async Task<MarginResponse> GetMarginAsync(string code)
         {
-            return await marginApiClient.GetMarginAsync(code);
+            return  await marginApiClient.GetMarginAsync(code);
         }
     }
 }

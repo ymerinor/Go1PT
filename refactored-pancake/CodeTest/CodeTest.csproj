@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="ExternalServices\Client\Model\MarginResponse.cs" />
     <Compile Include="ExternalServices\Component\IMarginProviderComponent.cs" />
     <Compile Include="ExternalServices\Client\MarginApiClient.cs" />
     <Compile Include="ExternalServices\MarginApiProvider.cs" />

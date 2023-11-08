@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PruebaIngreso.ExternalServices.Client.Model;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -29,31 +31,37 @@ namespace PruebaIngreso.ExternalServices.ExternalServices.Client
         }
 
         /// <inheritdoc/>
-        public async Task<decimal> GetMarginAsync(string code)
+        public async Task<MarginResponse> GetMarginAsync(string code)
         {
             string apiUrl = $"{_baseUrl}{code}";
-            var defaultValue = 0.0m;
+            var marginResponse = new MarginResponse();
             try
             {
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
                 HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+                
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
-                    if (decimal.TryParse(responseContent, out decimal margin))
+
+                    // Deserializar el JSON en una instancia de MarginResponse
+                    marginResponse = JsonConvert.DeserializeObject<MarginResponse>(responseContent);
+                    marginResponse.Status = response.StatusCode;
+                    if (marginResponse != null)
                     {
-                        defaultValue = margin;
-                        return defaultValue;
+                        return marginResponse;
                     }
                 }
                 else
                 {
-                    return defaultValue;
+                    marginResponse.Status = response.StatusCode;
+                    return marginResponse;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
-            return defaultValue;
+            return marginResponse;
         }
     }
 }

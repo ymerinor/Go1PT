@@ -1,4 +1,5 @@
-﻿using PruebaIngreso.ExternalServices.Component;
+﻿using PruebaIngreso.ExternalServices.Client.Model;
+using PruebaIngreso.ExternalServices.Component;
 using System.Threading.Tasks;
 
 namespace PruebaIngreso.ExternalServices
@@ -6,7 +7,7 @@ namespace PruebaIngreso.ExternalServices
     /// <summary>
     /// Decorador de margin provider
     /// </summary>
-    public abstract class  MarginProviderDecorator : IMarginProviderComponent
+    public abstract class  MarginProviderDecorator :  IMarginProviderComponent
     {
         /// <summary>
         /// se agrega dependencia con el componenete principal IMarginProvider
@@ -23,7 +24,7 @@ namespace PruebaIngreso.ExternalServices
         }
 
         /// <inheritdoc/>
-        public async Task<decimal> GetMarginAsync(string code)
+        public async Task<MarginResponse> GetMarginAsync(string code)
         {
             return await marginProvider.GetMarginAsync(code);
         }

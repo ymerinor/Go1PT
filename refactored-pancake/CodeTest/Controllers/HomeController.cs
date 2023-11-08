@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using PruebaIngreso.ExternalServices;
@@ -61,8 +62,13 @@ namespace PruebaIngreso.Controllers
 
         public async Task<ActionResult> Test3()
         {
+            var result = 0.0m;
             var marginResult = await _marginApiClient.GetMarginAsync("E-U10-PRVPARKTRF");
-            return View(marginResult);
+            if (marginResult.Status == HttpStatusCode.OK)
+            {
+                result = marginResult.Margin;
+            }
+            return View(result);
         }
 
         public async Task<ActionResult> Test4()
@@ -81,12 +87,10 @@ namespace PruebaIngreso.Controllers
                 },
                 Language = Language.Spanish
             };
-            var coponentBase = new MarginApiProvider();
-            var marginProviderDecaratorPlus = new MarginProviderDecaratorPlus(coponentBase);
-            await marginProviderDecaratorPlus.GetMarginAsync("E-U10-PRVPARKTRF");
 
+            var marginProviderDecaratorPlus = new MarginProviderDecaratorPlus(_marginApiClient);
+            var marginResult = await marginProviderDecaratorPlus.GetMarginAsync("E-U10-PRVPARKTRF", 0);
             var result = this.quote.Quote(request);
-
             return View(result.TourQuotes);
         }
     }
