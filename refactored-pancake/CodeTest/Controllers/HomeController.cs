@@ -62,13 +62,13 @@ namespace PruebaIngreso.Controllers
 
         public async Task<ActionResult> Test3()
         {
-            var result = 0.0m;
+            var resultTest3 = 0.0m;
             var marginResult = await _marginApiClient.GetMarginAsync("E-U10-PRVPARKTRF");
             if (marginResult.Status == HttpStatusCode.OK)
             {
-                result = marginResult.Margin;
+                resultTest3 = marginResult.Margin;
             }
-            return View(result);
+            return View(resultTest3);
         }
 
         public async Task<ActionResult> Test4()

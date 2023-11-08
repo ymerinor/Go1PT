@@ -17,10 +17,10 @@ namespace PruebaIngreso.ExternalServices
         /// <summary>
         /// Constructor que recibe una instancia de IMarginProvider para decorar.
         /// </summary>
-        /// <param name="innerProvider">dependecia de interface Margin Provider</param>
-        public MarginProviderDecorator(IMarginProviderComponent innerProvider)
+        /// <param name="marginProviderComponent">dependecia de interface Margin Provider</param>
+        public MarginProviderDecorator(IMarginProviderComponent marginProviderComponent)
         {
-            marginProvider = innerProvider;
+            marginProvider = marginProviderComponent;
         }
 
         /// <inheritdoc/>

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 namespace PruebaIngreso.ExternalServices.Component
 {
     /// <summary>
-    /// IMarginProvider
+    /// interface de deficion de abstracciones para componente de MarginProvider
     /// </summary>
     public interface  IMarginProviderComponent
     {
