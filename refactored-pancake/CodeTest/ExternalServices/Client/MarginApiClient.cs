@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PruebaIngreso.ExternalServices.Client.Model;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -34,38 +35,29 @@ namespace PruebaIngreso.ExternalServices.ExternalServices.Client
         public async Task<MarginResponse> GetMarginAsync(string code)
         {
             string apiUrl = $"{_baseUrl}{code}";
-            var marginResponse = new MarginResponse();
+
             try
             {
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
-                
+
+                var marginResponse = new MarginResponse();
                 if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
 
-                    // Deserializar el JSON en una instancia de MarginResponse
                     if (!string.IsNullOrEmpty(responseContent))
                     {
                         marginResponse = JsonConvert.DeserializeObject<MarginResponse>(responseContent);
                     }
-                    
-                    marginResponse.Status = response.StatusCode;
-                    if (marginResponse != null)
-                    {
-                        return marginResponse;
-                    }
                 }
-                else
-                {
-                    marginResponse.Status = response.StatusCode;
-                    return marginResponse;
-                }
+                marginResponse.Status = response.StatusCode;
+                return marginResponse;
             }
             catch (Exception)
             {
+                return new MarginResponse { Status = HttpStatusCode.InternalServerError };
             }
-            return marginResponse;
         }
     }
 }
