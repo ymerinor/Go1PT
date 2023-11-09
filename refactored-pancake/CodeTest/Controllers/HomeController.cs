@@ -63,7 +63,7 @@ namespace PruebaIngreso.Controllers
         public async Task<ActionResult> Test3()
         {
             var resultTest3 = 0.0m;
-            var marginResult = await _marginApiClient.GetMarginAsync("E-U10-PRVPARKTRF");
+            var marginResult = await _marginApiClient.GetMarginAsync("E-U10-UNILATIN");
             if (marginResult.Status == HttpStatusCode.OK)
             {
                 resultTest3 = marginResult.Margin;

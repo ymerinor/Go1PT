@@ -45,7 +45,11 @@ namespace PruebaIngreso.ExternalServices.ExternalServices.Client
                     string responseContent = await response.Content.ReadAsStringAsync();
 
                     // Deserializar el JSON en una instancia de MarginResponse
-                    marginResponse = JsonConvert.DeserializeObject<MarginResponse>(responseContent);
+                    if (!string.IsNullOrEmpty(responseContent))
+                    {
+                        marginResponse = JsonConvert.DeserializeObject<MarginResponse>(responseContent);
+                    }
+                    
                     marginResponse.Status = response.StatusCode;
                     if (marginResponse != null)
                     {

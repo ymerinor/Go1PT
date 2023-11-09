@@ -1,4 +1,5 @@
 ﻿using PruebaIngreso.ExternalServices.Component;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace PruebaIngreso.ExternalServices
@@ -24,7 +25,7 @@ namespace PruebaIngreso.ExternalServices
         public async Task<decimal> GetMarginAsync(string code, decimal defaultMargin)
         {
             var marginFromApi = await marginProvider.GetMarginAsync(code);
-            if (marginFromApi.Status == System.Net.HttpStatusCode.OK)
+            if (marginFromApi.Status == HttpStatusCode.OK)
             {
                 return marginFromApi.Margin;
             }
